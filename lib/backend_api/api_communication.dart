@@ -12,13 +12,16 @@ class Session {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   final String url = 'https://us-central1-tcc2026-7d3c4.cloudfunctions.net/api';
+  static const String _apiKey = String.fromEnvironment('FLUXIO_API_KEY');
 
   Session() {
     _setApiKey();
   }
 
   void _setApiKey() {
-    headers['x-api-key'] = 'ycevqNVkJRs5vSImbfCe6zpI8LBthNd4';
+    if (_apiKey.isNotEmpty) {
+      headers['x-api-key'] = _apiKey;
+    }
   }
 
   Future<void> loadCookie() async {
